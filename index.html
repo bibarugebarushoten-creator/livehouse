@@ -444,21 +444,27 @@
 
  <script>
   const places = [
+
     {
       id: "shimokitazawa",
       name: "Shimokitazawa",
       area: "Indie bands, small venues, record shops, night wandering",
-      x: 28,
-      y: 58,
+
+      x: 24,
+      y: 61,
+
       tags: ["indie", "live houses", "record stores"],
+
       description:
         "Shimokitazawa is the obvious starting point for Tokyo indie discovery: walkable, venue-dense, and easy to turn into a night of small-stage hopping.",
+
       venues: [
         ["BASEMENTBAR", "Strong sound, established live-house feel, good for band discovery."],
         ["RETRONYM", "Newer-feeling space with a bigger stage, couches, and a central Shimokita location."],
         ["SHELTER", "Classic Shimokitazawa live-house name for guitar music history."],
         ["THREE", "Underground-leaning indie and alternative shows."]
       ],
+
       links: [
         ["Read the Shimokitazawa guide", "#"],
         ["Browse live reports", "#"]
@@ -469,17 +475,22 @@
       id: "shibuya",
       name: "Shibuya",
       area: "International-friendly jams, open mics, bigger city energy",
-      x: 48,
-      y: 54,
+
+      x: 56,
+      y: 56,
+
       tags: ["open mic", "international", "central"],
+
       description:
         "Shibuya works well as an entry point for visitors because it has internationally friendly spaces, late-night energy, and easy transit connections.",
+
       venues: [
         ["RUBY ROOM", "Friendly staff, open mic Tuesdays, good for international musicians."],
         ["WWW / WWW X", "Larger shows, indie-adjacent bookings, strong discovery potential."],
         ["O-nest", "Long-running Shibuya live-house ecosystem."],
         ["Club Quattro", "Bigger club shows and touring acts."]
       ],
+
       links: [
         ["How to perform in Tokyo", "#"],
         ["Tokyo live house basics", "#"]
@@ -490,17 +501,22 @@
       id: "asagaya",
       name: "Asagaya",
       area: "DIY pockets, community bars, intimate shows",
-      x: 31,
-      y: 33,
+
+      x: 33,
+      y: 28,
+
       tags: ["DIY", "community", "small rooms"],
+
       description:
         "Asagaya is a good pin for the scrappier, community-run side of Tokyo music: less polished, more personal, and often easier to talk to people.",
+
       venues: [
         ["GAMUSO", "DIY feel, community-run energy, food/drinks, mixed events."],
         ["Loft A", "Talk events, music-adjacent culture, subculture programming."],
         ["Yellow Vision", "Small-room experimental and jazz-adjacent events."],
         ["MANHOLE Next", "Local underground event feel."]
       ],
+
       links: [
         ["DIY Tokyo music notes", "#"],
         ["International indie scene", "#"]
@@ -511,17 +527,22 @@
       id: "koenji",
       name: "Koenji",
       area: "Punk, used clothes, underground culture",
-      x: 22,
-      y: 36,
+
+      x: 20,
+      y: 32,
+
       tags: ["punk", "subculture", "underground"],
+
       description:
         "Koenji is useful for punk, noise, thrift culture, and less glossy Tokyo music routes. It feels more like a neighborhood than a tourist image.",
+
       venues: [
         ["U.F.O. CLUB", "Garage, psych, punk, and underground bookings."],
         ["HIGH", "Broad indie and alternative live-house programming."],
         ["JIROKICHI", "Historic room with rootsy and jazz-adjacent shows."],
         ["ShowBoat", "Long-running rock venue energy."]
       ],
+
       links: [
         ["Koenji scene guide", "#"],
         ["Underground Japan posts", "#"]
@@ -532,24 +553,28 @@
       id: "shinjuku",
       name: "Shinjuku",
       area: "Dense nightlife, legacy venues, chaotic Tokyo energy",
-      x: 39,
-      y: 38,
+
+      x: 45,
+      y: 36,
+
       tags: ["nightlife", "rock", "live houses"],
+
       description:
         "Shinjuku is loud, dense, chaotic, and full of long-running live houses. Good for heavier nightlife energy and discovering multiple scenes in one night.",
+
       venues: [
         ["LOFT", "Historic live house with deep Tokyo music history."],
         ["MARZ", "Alternative and indie-focused bookings."],
         ["WildSide Tokyo", "Rock, punk, metal, and loud bands."],
         ["Antiknock", "Underground punk and heavier music lineage."]
       ],
+
       links: [
         ["Shinjuku scene guide", "#"],
         ["Tokyo nightlife posts", "#"]
       ]
     }
   ];
-
     const map = document.getElementById("tokyoMap");
     const panel = document.getElementById("infoPanel");
 
