@@ -6,14 +6,14 @@
   <title>OfficialGF Tokyo Scene Map</title>
   <style>
     :root {
-      --text: #1b1028;
-      --muted: #735f86;
-      --line: rgba(90, 43, 130, .22);
-      --paper: rgba(255,255,255,.82);
-      --pink: #ff8bd8;
-      --blue: #8be7ff;
-      --yellow: #fff3a8;
-      --purple: #caa7ff;
+      --text: #161616;
+      --muted: #6b6b6b;
+      --yellow: #ffe066;
+      --red: #ff4d5a;
+      --silver: #d7d7d7;
+      --blue: #6bbcff;
+      --paper: rgba(255,255,255,.84);
+      --line: rgba(255,255,255,.14);
     }
 
     html, body {
@@ -43,25 +43,26 @@
     .map-panel,
     .info-panel {
       background:
-        linear-gradient(135deg, rgba(255,255,255,.92), rgba(255,240,252,.82));
-      border: 1px solid var(--line);
+        linear-gradient(135deg, rgba(255,255,255,.92), rgba(215,215,215,.72));
+      border: 1px solid rgba(255,255,255,.24);
       border-radius: 24px;
-      box-shadow: 0 12px 35px rgba(120, 69, 180, .16);
+      box-shadow: 0 12px 35px rgba(0,0,0,.16);
       overflow: hidden;
       position: relative;
     }
 
     .map-panel::before,
     .info-panel::before {
-      content: "✦ ✧ ✦";
+      content: "★ ✦ ★";
       position: absolute;
       top: 14px;
       right: 18px;
-      color: var(--pink);
+      color: var(--red);
       font-size: 18px;
       letter-spacing: 6px;
       opacity: .8;
       pointer-events: none;
+      text-shadow: 0 0 8px rgba(255,224,102,.7);
     }
 
     .map-header {
@@ -84,7 +85,9 @@
       line-height: .9;
       margin-bottom: 10px;
       letter-spacing: -0.06em;
-      text-shadow: 2px 2px 0 var(--blue), 4px 4px 0 rgba(255,139,216,.45);
+      text-shadow:
+        2px 2px 0 var(--blue),
+        4px 4px 0 rgba(255,224,102,.75);
     }
 
     .intro {
@@ -102,55 +105,59 @@
       border-radius: 22px;
       overflow: hidden;
       background:
-        radial-gradient(circle at 18% 20%, rgba(255,139,216,.45), transparent 16%),
-        radial-gradient(circle at 72% 28%, rgba(139,231,255,.42), transparent 18%),
-        radial-gradient(circle at 52% 72%, rgba(255,243,168,.45), transparent 18%),
-        linear-gradient(90deg, rgba(120,69,180,.10) 1px, transparent 1px),
-        linear-gradient(rgba(120,69,180,.10) 1px, transparent 1px),
-        rgba(255,255,255,.55);
-      background-size: auto, auto, auto, 38px 38px, 38px 38px, auto;
-      border: 1px solid var(--line);
+        linear-gradient(rgba(255,255,255,.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.06) 1px, transparent 1px),
+        radial-gradient(circle at 20% 20%, rgba(255,224,102,.18), transparent 18%),
+        radial-gradient(circle at 80% 25%, rgba(107,188,255,.16), transparent 20%),
+        radial-gradient(circle at 55% 70%, rgba(255,77,90,.14), transparent 22%),
+        linear-gradient(135deg, #111827, #1b1028);
+      background-size:
+        38px 38px,
+        38px 38px,
+        auto,
+        auto,
+        auto,
+        auto;
+      border: 1px solid rgba(255,255,255,.08);
     }
 
     .star {
       position: absolute;
-      color: #ff6fd8;
-      font-size: 18px;
+      color: var(--silver);
+      font-size: 20px;
       opacity: .9;
-      animation: twinkle 2.8s infinite ease-in-out;
+      animation: twinkle 3s infinite ease-in-out;
       pointer-events: none;
+      text-shadow:
+        0 0 6px rgba(255,255,255,.8),
+        0 0 16px rgba(107,188,255,.45);
     }
 
     .star.s1 { left: 12%; top: 18%; }
     .star.s2 { left: 70%; top: 16%; animation-delay: .5s; }
     .star.s3 { left: 82%; top: 68%; animation-delay: 1s; }
     .star.s4 { left: 17%; top: 78%; animation-delay: 1.4s; }
-    .star.s5 { left: 48%; top: 31%; animation-delay: .8s; color: #8be7ff; }
+    .star.s5 { left: 48%; top: 31%; animation-delay: .8s; color: var(--yellow); }
+    .star.s6 { left: 61%; top: 82%; animation-delay: 1.8s; color: var(--blue); }
+    .star.s7 { left: 35%; top: 22%; animation-delay: 2.1s; color: var(--red); }
 
     @keyframes twinkle {
-      0%, 100% { transform: scale(1); opacity: .55; }
-      50% { transform: scale(1.35); opacity: 1; }
-    }
+      0%, 100% {
+        transform: scale(1) rotate(0deg);
+        opacity: .55;
+      }
 
-    .route {
-      position: absolute;
-      height: 3px;
-      background: linear-gradient(90deg, var(--pink), var(--blue));
-      transform-origin: left center;
-      pointer-events: none;
-      border-radius: 999px;
-      box-shadow: 0 0 10px rgba(255,139,216,.45);
+      50% {
+        transform: scale(1.35) rotate(12deg);
+        opacity: 1;
+      }
     }
-
-    .route.r1 { width: 230px; left: 22%; top: 40%; transform: rotate(14deg); }
-    .route.r2 { width: 210px; left: 28%; top: 52%; transform: rotate(-18deg); }
-    .route.r3 { width: 170px; left: 24%; top: 63%; transform: rotate(20deg); }
 
     .map-label {
       position: absolute;
       font-size: 11px;
       letter-spacing: .08em;
-      color: rgba(74, 36, 110, .52);
+      color: rgba(255,255,255,.42);
       text-transform: uppercase;
       pointer-events: none;
       font-weight: 700;
@@ -172,38 +179,58 @@
     }
 
     .pin-dot {
-      width: 24px;
-      height: 24px;
+      width: auto;
+      height: auto;
       display: block;
-      margin: 0 auto 7px;
-      border-radius: 50%;
-      background: radial-gradient(circle at 35% 30%, #fff, var(--pink) 38%, #7c3cff 100%);
-      border: 3px solid #fff;
-      box-shadow: 0 0 0 2px rgba(124,60,255,.35), 0 0 18px rgba(255,139,216,.7);
-      transition: transform .18s ease, box-shadow .18s ease;
+      margin: 0 auto 8px;
+      font-size: 28px;
+      line-height: 1;
+      color: var(--yellow);
+      text-shadow:
+        0 0 8px rgba(255,224,102,.85),
+        0 0 18px rgba(255,77,90,.45),
+        0 0 28px rgba(107,188,255,.4);
+      transition: transform .18s ease, text-shadow .18s ease;
     }
 
     .pin-name {
       display: inline-block;
-      padding: 6px 10px;
+      padding: 6px 11px;
       border-radius: 999px;
-      background: rgba(255,255,255,.9);
-      border: 1px solid rgba(124,60,255,.22);
+      background:
+        linear-gradient(
+          180deg,
+          rgba(255,255,255,.95),
+          rgba(215,215,215,.82)
+        );
+      border: 1px solid rgba(255,255,255,.15);
       font-size: 12px;
       font-weight: 800;
       white-space: nowrap;
-      box-shadow: 0 5px 12px rgba(120,69,180,.12);
+      color: #111;
+      box-shadow:
+        0 4px 14px rgba(0,0,0,.2),
+        inset 0 1px 0 rgba(255,255,255,.8);
     }
 
     .pin:hover .pin-dot,
     .pin.active .pin-dot {
-      transform: scale(1.28) rotate(8deg);
-      box-shadow: 0 0 0 5px rgba(255,139,216,.25), 0 0 24px rgba(139,231,255,.9);
+      transform: scale(1.3) rotate(12deg);
+      text-shadow:
+        0 0 10px rgba(255,224,102,1),
+        0 0 24px rgba(255,77,90,.65),
+        0 0 34px rgba(107,188,255,.6);
     }
 
     .pin.active .pin-name {
-      background: linear-gradient(90deg, var(--pink), var(--blue));
-      color: #1b1028;
+      background:
+        linear-gradient(
+          90deg,
+          var(--yellow),
+          var(--red),
+          var(--blue)
+        );
+      color: #111;
     }
 
     .info-panel {
@@ -222,11 +249,12 @@
 
     .tag {
       font-size: 12px;
-      border: 1px solid var(--line);
+      border: 1px solid rgba(0,0,0,.08);
       border-radius: 999px;
       padding: 6px 9px;
-      background: rgba(255,255,255,.68);
-      box-shadow: inset 0 -4px 0 rgba(255,139,216,.18);
+      background: rgba(255,255,255,.7);
+      box-shadow: inset 0 -4px 0 rgba(107,188,255,.18);
+      font-weight: 700;
     }
 
     .info-title {
@@ -234,7 +262,9 @@
       line-height: .95;
       letter-spacing: -0.05em;
       margin-bottom: 8px;
-      text-shadow: 2px 2px 0 rgba(139,231,255,.65);
+      text-shadow:
+        2px 2px 0 rgba(107,188,255,.65),
+        4px 4px 0 rgba(255,224,102,.45);
     }
 
     .area {
@@ -247,7 +277,7 @@
     .description {
       line-height: 1.55;
       font-size: 15px;
-      color: #2a173a;
+      color: #222;
       margin-bottom: 20px;
     }
 
@@ -272,17 +302,25 @@
       display: inline-block;
       padding: 11px 14px;
       border-radius: 999px;
-      border: 1px solid #7c3cff;
-      color: #1b1028;
+      border: 1px solid #111;
+      color: #111;
       text-decoration: none;
       font-size: 13px;
       font-weight: 800;
-      background: rgba(255,255,255,.72);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.88), rgba(215,215,215,.72));
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.9);
     }
 
     .map-button.primary {
-      background: linear-gradient(90deg, var(--pink), var(--blue));
-      color: #1b1028;
+      background:
+        linear-gradient(
+          90deg,
+          var(--yellow),
+          var(--red),
+          var(--blue)
+        );
+      color: #111;
     }
 
     .venue-list {
@@ -293,22 +331,35 @@
     }
 
     .venue-card {
-      border: 1px solid var(--line);
-      background: rgba(255,255,255,.72);
+      border: 1px solid rgba(0,0,0,.08);
+      background: rgba(255,255,255,.74);
       border-radius: 16px;
       padding: 12px;
-      box-shadow: 0 5px 14px rgba(120,69,180,.08);
+      box-shadow:
+        0 5px 14px rgba(0,0,0,.08),
+        inset 0 1px 0 rgba(255,255,255,.85);
     }
 
-    .venue-card strong { display: block; margin-bottom: 4px; }
-    .venue-card span { color: var(--muted); font-size: 12px; line-height: 1.35; display: block; }
+    .venue-card strong {
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .venue-card span {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.35;
+      display: block;
+    }
 
     @media (max-width: 850px) {
+      .scene-map { padding: 12px; }
       .map-shell { grid-template-columns: 1fr; }
       .tokyo-map { height: 430px; }
       .info-panel { min-height: auto; }
       .venue-list { grid-template-columns: 1fr; }
       .pin-name { font-size: 11px; }
+      .pin-dot { font-size: 24px; }
     }
   </style>
 </head>
@@ -319,7 +370,7 @@
         <div class="map-header">
           <p class="eyebrow">OfficialGF field notes</p>
           <h1>Tokyo Scene Map</h1>
-          <p class="intro">Click a neighborhood to explore indie pockets, DIY venues, and live-house routes around Tokyo.</p>
+          <p class="intro">Click a star to explore indie pockets, DIY venues, and live-house routes around Tokyo.</p>
         </div>
 
         <div class="tokyo-map" id="tokyoMap">
@@ -332,10 +383,8 @@
           <span class="star s3">✦</span>
           <span class="star s4">✧</span>
           <span class="star s5">★</span>
-
-          <span class="route r1"></span>
-          <span class="route r2"></span>
-          <span class="route r3"></span>
+          <span class="star s6">✧</span>
+          <span class="star s7">✦</span>
         </div>
       </section>
 
@@ -433,7 +482,7 @@
         button.style.left = place.x + "%";
         button.style.top = place.y + "%";
         button.setAttribute("aria-label", "Open " + place.name);
-        button.innerHTML = `<span class="pin-dot"></span><span class="pin-name">${place.name}</span>`;
+        button.innerHTML = `<span class="pin-dot">★</span><span class="pin-name">${place.name}</span>`;
         button.addEventListener("click", () => selectPlace(place.id));
         map.appendChild(button);
       });
@@ -448,18 +497,20 @@
       });
 
       const tags = place.tags.map((tag) => `<span class="tag">${tag}</span>`).join("");
+
       const venues = place.venues.map(([name, note]) => `
         <div class="venue-card">
           <strong>${name}</strong>
           <span>${note}</span>
         </div>
       `).join("");
+
       const links = place.links.map(([label, href], index) => `
         <a class="map-button ${index === 0 ? "primary" : ""}" href="${href}" target="_top">${label}</a>
       `).join("");
 
       panel.innerHTML = `
-        <p class="eyebrow">Tokyo scene pin ✦</p>
+        <p class="eyebrow">Tokyo scene pin ★</p>
         <h2 class="info-title">${place.name}</h2>
         <p class="area">${place.area}</p>
         <p class="description">${place.description}</p>
