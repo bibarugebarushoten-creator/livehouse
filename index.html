@@ -8,12 +8,14 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
   <link href="https://fonts.googleapis.com/css2?family=Audiowide&display=swap" rel="stylesheet">
 
   <style>
     :root {
       --text: #161616;
       --muted: #6b6b6b;
+
       --yellow: #ffe066;
       --red: #ff4d5a;
       --silver: #d7d7d7;
@@ -28,7 +30,9 @@
       color: var(--text);
     }
 
-    * { box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+    }
 
     .scene-map {
       width: 100%;
@@ -45,11 +49,21 @@
 
     .map-panel,
     .info-panel {
-      background: linear-gradient(135deg, rgba(255,255,255,.92), rgba(215,215,215,.72));
+      background:
+        linear-gradient(
+          135deg,
+          rgba(255,255,255,.92),
+          rgba(215,215,215,.72)
+        );
+
       border: 1px solid rgba(255,255,255,.22);
+
       border-radius: 24px;
+
       overflow: hidden;
+
       position: relative;
+
       box-shadow:
         0 10px 40px rgba(0,0,0,.18),
         inset 0 1px 0 rgba(255,255,255,.7);
@@ -58,14 +72,22 @@
     .map-panel::before,
     .info-panel::before {
       content: "★ ✦ ★";
+
       position: absolute;
+
       top: 14px;
       right: 18px;
+
       color: var(--red);
+
       font-size: 18px;
+
       letter-spacing: 6px;
+
       opacity: .85;
+
       pointer-events: none;
+
       text-shadow:
         0 0 8px rgba(255,224,102,.8),
         0 0 16px rgba(107,188,255,.45);
@@ -84,17 +106,27 @@
       font-weight: 700;
     }
 
-    h1, h2, h3, p { margin-top: 0; }
+    h1, h2, h3, p {
+      margin-top: 0;
+    }
 
     h1 {
       font-family: 'Audiowide', sans-serif;
+
       font-size: clamp(24px, 3.4vw, 42px);
+
       line-height: 1;
+
       margin-bottom: 12px;
+
       letter-spacing: .01em;
+
       color: white;
+
       text-transform: uppercase;
+
       white-space: nowrap;
+
       text-shadow:
         0 0 6px rgba(255,255,255,.9),
         0 0 12px rgba(107,188,255,.8),
@@ -104,25 +136,42 @@
 
     .intro {
       color: #111;
+
       font-size: 14px;
+
       line-height: 1.5;
+
       max-width: 720px;
+
       margin-bottom: 0;
     }
 
     .tokyo-map {
       position: relative;
+
       height: 520px;
+
       margin: 12px 18px 18px;
+
       border-radius: 22px;
+
       overflow: hidden;
+
       background:
         linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px),
         linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px),
+
         radial-gradient(circle at 26% 35%, rgba(255,224,102,.16), transparent 20%),
         radial-gradient(circle at 60% 42%, rgba(107,188,255,.16), transparent 22%),
         radial-gradient(circle at 48% 66%, rgba(255,77,90,.13), transparent 24%),
-        linear-gradient(135deg, #111827, #171124, #221933);
+
+        linear-gradient(
+          135deg,
+          #111827,
+          #171124,
+          #221933
+        );
+
       background-size:
         38px 38px,
         38px 38px,
@@ -130,26 +179,57 @@
         auto,
         auto,
         auto;
+
       border: 1px solid rgba(255,255,255,.08);
     }
 
     .star {
       position: absolute;
+
       color: var(--silver);
-      font-size: 20px;
+
+      font-size: 34px;
+
       opacity: .9;
+
       animation: twinkle 3s infinite ease-in-out;
+
       pointer-events: none;
+
       text-shadow:
-        0 0 6px rgba(255,255,255,.8),
-        0 0 16px rgba(107,188,255,.45);
+        0 0 8px rgba(255,255,255,.85),
+        0 0 18px rgba(107,188,255,.55);
     }
 
-    .star.s1 { left: 10%; top: 21%; }
-    .star.s2 { left: 73%; top: 19%; animation-delay: .5s; }
-    .star.s3 { left: 83%; top: 71%; animation-delay: 1s; }
-    .star.s4 { left: 15%; top: 82%; animation-delay: 1.4s; }
-    .star.s6 { left: 60%; top: 86%; animation-delay: 1.8s; color: var(--blue); }
+    .star.s1 {
+      left: 10%;
+      top: 21%;
+    }
+
+    .star.s2 {
+      left: 73%;
+      top: 19%;
+      animation-delay: .5s;
+    }
+
+    .star.s3 {
+      left: 83%;
+      top: 71%;
+      animation-delay: 1s;
+    }
+
+    .star.s4 {
+      left: 15%;
+      top: 82%;
+      animation-delay: 1.4s;
+    }
+
+    .star.s6 {
+      left: 60%;
+      top: 86%;
+      animation-delay: 1.8s;
+      color: var(--blue);
+    }
 
     @keyframes twinkle {
       0%, 100% {
@@ -165,12 +245,19 @@
 
     .map-label {
       position: absolute;
-      font-size: 11px;
+
+      font-size: 16px;
+
       letter-spacing: .08em;
-      color: rgba(255,255,255,.38);
+
+      color: rgba(255,255,255,.42);
+
       text-transform: uppercase;
+
       pointer-events: none;
-      font-weight: 700;
+
+      font-weight: 800;
+
       white-space: nowrap;
     }
 
@@ -191,25 +278,38 @@
 
     .pin {
       position: absolute;
+
       transform: translate(-50%, -50%);
+
       border: 0;
+
       background: transparent;
+
       cursor: pointer;
+
       padding: 0;
+
       text-align: center;
+
       color: var(--text);
     }
 
     .pin-dot {
       display: block;
-      margin: 0 auto 8px;
-      font-size: 34px;
+
+      margin: 0 auto 10px;
+
+      font-size: 48px;
+
       line-height: 1;
+
       color: var(--yellow);
+
       text-shadow:
-        0 0 8px rgba(255,224,102,.85),
-        0 0 18px rgba(255,77,90,.45),
-        0 0 28px rgba(107,188,255,.4);
+        0 0 10px rgba(255,224,102,.95),
+        0 0 22px rgba(255,77,90,.55),
+        0 0 34px rgba(107,188,255,.5);
+
       transition:
         transform .18s ease,
         text-shadow .18s ease;
@@ -217,14 +317,28 @@
 
     .pin-name {
       display: inline-block;
-      padding: 6px 11px;
+
+      padding: 10px 18px;
+
       border-radius: 999px;
-      background: linear-gradient(180deg, rgba(255,255,255,.95), rgba(215,215,215,.82));
+
+      background:
+        linear-gradient(
+          180deg,
+          rgba(255,255,255,.95),
+          rgba(215,215,215,.82)
+        );
+
       border: 1px solid rgba(255,255,255,.15);
-      font-size: 12px;
-      font-weight: 800;
+
+      font-size: 18px;
+
+      font-weight: 900;
+
       white-space: nowrap;
+
       color: #111;
+
       box-shadow:
         0 4px 14px rgba(0,0,0,.2),
         inset 0 1px 0 rgba(255,255,255,.8);
@@ -233,6 +347,7 @@
     .pin:hover .pin-dot,
     .pin.active .pin-dot {
       transform: scale(1.32) rotate(14deg);
+
       text-shadow:
         0 0 10px rgba(255,224,102,1),
         0 0 24px rgba(255,77,90,.7),
@@ -240,13 +355,22 @@
     }
 
     .pin.active .pin-name {
-      background: linear-gradient(90deg, var(--yellow), var(--red), var(--blue));
+      background:
+        linear-gradient(
+          90deg,
+          var(--yellow),
+          var(--red),
+          var(--blue)
+        );
+
       color: #111;
     }
 
     .info-panel {
       padding: 24px;
+
       min-height: 520px;
+
       display: flex;
       flex-direction: column;
     }
@@ -255,27 +379,44 @@
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
+
       margin: 12px 0 18px;
     }
 
     .tag {
       font-size: 12px;
+
       border-radius: 999px;
+
       padding: 6px 10px;
-      background: linear-gradient(180deg, rgba(255,255,255,.9), rgba(215,215,215,.78));
+
+      background:
+        linear-gradient(
+          180deg,
+          rgba(255,255,255,.9),
+          rgba(215,215,215,.78)
+        );
+
       box-shadow:
         inset 0 1px 0 rgba(255,255,255,.9),
         0 3px 10px rgba(0,0,0,.08);
+
       font-weight: 700;
     }
 
     .info-title {
       font-family: 'Audiowide', sans-serif;
+
       font-size: 34px;
+
       line-height: .95;
+
       letter-spacing: .02em;
+
       margin-bottom: 8px;
+
       color: #1b1028;
+
       text-shadow:
         2px 2px 0 rgba(107,188,255,.55),
         4px 4px 0 rgba(255,224,102,.35);
@@ -283,65 +424,109 @@
 
     .area {
       font-size: 13px;
+
       color: var(--muted);
+
       margin-bottom: 18px;
+
       font-weight: 700;
     }
 
     .description {
       line-height: 1.55;
+
       font-size: 15px;
+
       color: #222;
+
       margin-bottom: 20px;
     }
 
     .section-title {
       font-size: 12px;
+
       letter-spacing: .1em;
+
       text-transform: uppercase;
+
       color: var(--muted);
+
       margin: 18px 0 8px;
+
       font-weight: 800;
     }
 
     .button-row {
       margin-top: auto;
+
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
+
       padding-top: 22px;
     }
 
     .map-button {
       display: inline-block;
+
       padding: 11px 14px;
+
       border-radius: 999px;
+
       border: 1px solid rgba(0,0,0,.12);
+
       color: #111;
+
       text-decoration: none;
+
       font-size: 13px;
+
       font-weight: 800;
-      background: linear-gradient(180deg, rgba(255,255,255,.92), rgba(215,215,215,.72));
+
+      background:
+        linear-gradient(
+          180deg,
+          rgba(255,255,255,.92),
+          rgba(215,215,215,.72)
+        );
+
       box-shadow:
         inset 0 1px 0 rgba(255,255,255,.9),
         0 4px 12px rgba(0,0,0,.08);
     }
 
     .map-button.primary {
-      background: linear-gradient(90deg, var(--yellow), var(--red), var(--blue));
+      background:
+        linear-gradient(
+          90deg,
+          var(--yellow),
+          var(--red),
+          var(--blue)
+        );
     }
 
     .venue-list {
       display: grid;
+
       grid-template-columns: repeat(2, minmax(0, 1fr));
+
       gap: 10px;
+
       margin-top: 12px;
     }
 
     .venue-card {
       border-radius: 16px;
+
       padding: 12px;
-      background: linear-gradient(180deg, rgba(255,255,255,.88), rgba(215,215,215,.72));
+
+      background:
+        linear-gradient(
+          180deg,
+          rgba(255,255,255,.88),
+          rgba(215,215,215,.72)
+        );
+
       box-shadow:
         0 5px 14px rgba(0,0,0,.08),
         inset 0 1px 0 rgba(255,255,255,.85);
@@ -354,8 +539,11 @@
 
     .venue-card span {
       color: var(--muted);
+
       font-size: 12px;
+
       line-height: 1.35;
+
       display: block;
     }
 
@@ -377,26 +565,15 @@
       }
 
       .pin-name {
-        font-size: 11px;
+        font-size: 14px;
       }
 
       .pin-dot {
-        font-size: 28px;
+        font-size: 34px;
       }
 
-      .label-west {
-        left: 63%;
-        top: 44%;
-      }
-
-      .label-central {
-        left: 10%;
-        top: 18%;
-      }
-
-      .label-south {
-        left: 36%;
-        top: 75%;
+      .map-label {
+        font-size: 13px;
       }
     }
   </style>
@@ -404,8 +581,11 @@
 
 <body>
   <main class="scene-map" aria-label="Interactive Tokyo music scene map">
+
     <div class="map-shell">
+
       <section class="map-panel">
+
         <div class="map-header">
           <p class="eyebrow">OfficialGF field notes</p>
 
@@ -418,6 +598,7 @@
         </div>
 
         <div class="tokyo-map" id="tokyoMap">
+
           <span class="map-label label-west">
             clubs and parties
           </span>
@@ -435,183 +616,203 @@
           <span class="star s3">✦</span>
           <span class="star s4">✧</span>
           <span class="star s6">✧</span>
+
         </div>
       </section>
 
       <aside class="info-panel" id="infoPanel"></aside>
+
     </div>
   </main>
 
- <script>
-  const places = [
+  <script>
+    const places = [
 
-    {
-      id: "shimokitazawa",
-      name: "Shimokitazawa",
-      area: "Indie bands, small venues, record shops, night wandering",
+      {
+        id: "shimokitazawa",
+        name: "Shimokitazawa",
+        area: "Indie bands, small venues, record shops, night wandering",
 
-      x: 24,
-      y: 61,
+        x: 24,
+        y: 61,
 
-      tags: ["indie", "live houses", "record stores"],
+        tags: ["indie", "live houses", "record stores"],
 
-      description:
-        "Shimokitazawa is the obvious starting point for Tokyo indie discovery: walkable, venue-dense, and easy to turn into a night of small-stage hopping.",
+        description:
+          "Shimokitazawa is the obvious starting point for Tokyo indie discovery: walkable, venue-dense, and easy to turn into a night of small-stage hopping.",
 
-      venues: [
-        ["BASEMENTBAR", "Strong sound, established live-house feel, good for band discovery."],
-        ["RETRONYM", "Newer-feeling space with a bigger stage, couches, and a central Shimokita location."],
-        ["SHELTER", "Classic Shimokitazawa live-house name for guitar music history."],
-        ["THREE", "Underground-leaning indie and alternative shows."]
-      ],
+        venues: [
+          ["BASEMENTBAR", "Strong sound, established live-house feel, good for band discovery."],
+          ["RETRONYM", "Newer-feeling space with a bigger stage, couches, and a central Shimokita location."],
+          ["SHELTER", "Classic Shimokitazawa live-house name for guitar music history."],
+          ["THREE", "Underground-leaning indie and alternative shows."]
+        ],
 
-      links: [
-        ["Read the Shimokitazawa guide", "#"],
-        ["Browse live reports", "#"]
-      ]
-    },
+        links: [
+          ["Read the Shimokitazawa guide", "#"],
+          ["Browse live reports", "#"]
+        ]
+      },
 
-    {
-      id: "shibuya",
-      name: "Shibuya",
-      area: "International-friendly jams, open mics, bigger city energy",
+      {
+        id: "shibuya",
+        name: "Shibuya",
+        area: "International-friendly jams, open mics, bigger city energy",
 
-      x: 56,
-      y: 56,
+        x: 56,
+        y: 56,
 
-      tags: ["open mic", "international", "central"],
+        tags: ["open mic", "international", "central"],
 
-      description:
-        "Shibuya works well as an entry point for visitors because it has internationally friendly spaces, late-night energy, and easy transit connections.",
+        description:
+          "Shibuya works well as an entry point for visitors because it has internationally friendly spaces, late-night energy, and easy transit connections.",
 
-      venues: [
-        ["RUBY ROOM", "Friendly staff, open mic Tuesdays, good for international musicians."],
-        ["WWW / WWW X", "Larger shows, indie-adjacent bookings, strong discovery potential."],
-        ["O-nest", "Long-running Shibuya live-house ecosystem."],
-        ["Club Quattro", "Bigger club shows and touring acts."]
-      ],
+        venues: [
+          ["RUBY ROOM", "Friendly staff, open mic Tuesdays, good for international musicians."],
+          ["WWW / WWW X", "Larger shows, indie-adjacent bookings, strong discovery potential."],
+          ["O-nest", "Long-running Shibuya live-house ecosystem."],
+          ["Club Quattro", "Bigger club shows and touring acts."]
+        ],
 
-      links: [
-        ["How to perform in Tokyo", "#"],
-        ["Tokyo live house basics", "#"]
-      ]
-    },
+        links: [
+          ["How to perform in Tokyo", "#"],
+          ["Tokyo live house basics", "#"]
+        ]
+      },
 
-    {
-      id: "asagaya",
-      name: "Asagaya",
-      area: "DIY pockets, community bars, intimate shows",
+      {
+        id: "asagaya",
+        name: "Asagaya",
+        area: "DIY pockets, community bars, intimate shows",
 
-      x: 33,
-      y: 28,
+        x: 33,
+        y: 28,
 
-      tags: ["DIY", "community", "small rooms"],
+        tags: ["DIY", "community", "small rooms"],
 
-      description:
-        "Asagaya is a good pin for the scrappier, community-run side of Tokyo music: less polished, more personal, and often easier to talk to people.",
+        description:
+          "Asagaya is a good pin for the scrappier, community-run side of Tokyo music: less polished, more personal, and often easier to talk to people.",
 
-      venues: [
-        ["GAMUSO", "DIY feel, community-run energy, food/drinks, mixed events."],
-        ["Loft A", "Talk events, music-adjacent culture, subculture programming."],
-        ["Yellow Vision", "Small-room experimental and jazz-adjacent events."],
-        ["MANHOLE Next", "Local underground event feel."]
-      ],
+        venues: [
+          ["GAMUSO", "DIY feel, community-run energy, food/drinks, mixed events."],
+          ["Loft A", "Talk events, music-adjacent culture, subculture programming."],
+          ["Yellow Vision", "Small-room experimental and jazz-adjacent events."],
+          ["MANHOLE Next", "Local underground event feel."]
+        ],
 
-      links: [
-        ["DIY Tokyo music notes", "#"],
-        ["International indie scene", "#"]
-      ]
-    },
+        links: [
+          ["DIY Tokyo music notes", "#"],
+          ["International indie scene", "#"]
+        ]
+      },
 
-    {
-      id: "koenji",
-      name: "Koenji",
-      area: "Punk, used clothes, underground culture",
+      {
+        id: "koenji",
+        name: "Koenji",
+        area: "Punk, used clothes, underground culture",
 
-      x: 20,
-      y: 32,
+        x: 20,
+        y: 32,
 
-      tags: ["punk", "subculture", "underground"],
+        tags: ["punk", "subculture", "underground"],
 
-      description:
-        "Koenji is useful for punk, noise, thrift culture, and less glossy Tokyo music routes. It feels more like a neighborhood than a tourist image.",
+        description:
+          "Koenji is useful for punk, noise, thrift culture, and less glossy Tokyo music routes. It feels more like a neighborhood than a tourist image.",
 
-      venues: [
-        ["U.F.O. CLUB", "Garage, psych, punk, and underground bookings."],
-        ["HIGH", "Broad indie and alternative live-house programming."],
-        ["JIROKICHI", "Historic room with rootsy and jazz-adjacent shows."],
-        ["ShowBoat", "Long-running rock venue energy."]
-      ],
+        venues: [
+          ["U.F.O. CLUB", "Garage, psych, punk, and underground bookings."],
+          ["HIGH", "Broad indie and alternative live-house programming."],
+          ["JIROKICHI", "Historic room with rootsy and jazz-adjacent shows."],
+          ["ShowBoat", "Long-running rock venue energy."]
+        ],
 
-      links: [
-        ["Koenji scene guide", "#"],
-        ["Underground Japan posts", "#"]
-      ]
-    },
+        links: [
+          ["Koenji scene guide", "#"],
+          ["Underground Japan posts", "#"]
+        ]
+      },
 
-    {
-      id: "shinjuku",
-      name: "Shinjuku",
-      area: "Dense nightlife, legacy venues, chaotic Tokyo energy",
+      {
+        id: "shinjuku",
+        name: "Shinjuku",
+        area: "Dense nightlife, legacy venues, chaotic Tokyo energy",
 
-      x: 45,
-      y: 36,
+        x: 45,
+        y: 36,
 
-      tags: ["nightlife", "rock", "live houses"],
+        tags: ["nightlife", "rock", "live houses"],
 
-      description:
-        "Shinjuku is loud, dense, chaotic, and full of long-running live houses. Good for heavier nightlife energy and discovering multiple scenes in one night.",
+        description:
+          "Shinjuku is loud, dense, chaotic, and full of long-running live houses. Good for heavier nightlife energy and discovering multiple scenes in one night.",
 
-      venues: [
-        ["LOFT", "Historic live house with deep Tokyo music history."],
-        ["MARZ", "Alternative and indie-focused bookings."],
-        ["WildSide Tokyo", "Rock, punk, metal, and loud bands."],
-        ["Antiknock", "Underground punk and heavier music lineage."]
-      ],
+        venues: [
+          ["LOFT", "Historic live house with deep Tokyo music history."],
+          ["MARZ", "Alternative and indie-focused bookings."],
+          ["WildSide Tokyo", "Rock, punk, metal, and loud bands."],
+          ["Antiknock", "Underground punk and heavier music lineage."]
+        ],
 
-      links: [
-        ["Shinjuku scene guide", "#"],
-        ["Tokyo nightlife posts", "#"]
-      ]
-    }
-  ];
+        links: [
+          ["Shinjuku scene guide", "#"],
+          ["Tokyo nightlife posts", "#"]
+        ]
+      }
+    ];
+
     const map = document.getElementById("tokyoMap");
     const panel = document.getElementById("infoPanel");
 
     function renderPins() {
+
       places.forEach((place) => {
+
         const button = document.createElement("button");
 
         button.className = "pin";
+
         button.style.left = place.x + "%";
         button.style.top = place.y + "%";
 
-        button.setAttribute("aria-label", "Open " + place.name);
+        button.setAttribute(
+          "aria-label",
+          "Open " + place.name
+        );
 
         button.innerHTML =
           `<span class="pin-dot">★</span>
            <span class="pin-name">${place.name}</span>`;
 
-        button.addEventListener("click", () => selectPlace(place.id));
+        button.addEventListener(
+          "click",
+          () => selectPlace(place.id)
+        );
 
         map.appendChild(button);
       });
     }
 
     function selectPlace(id) {
-      const place = places.find((item) => item.id === id);
+
+      const place = places.find(
+        (item) => item.id === id
+      );
 
       if (!place) return;
 
       document.querySelectorAll(".pin").forEach((pin) => {
+
         pin.classList.toggle(
           "active",
-          pin.getAttribute("aria-label") === "Open " + place.name
+          pin.getAttribute("aria-label") ===
+          "Open " + place.name
         );
       });
 
       const tags = place.tags
-        .map((tag) => `<span class="tag">${tag}</span>`)
+        .map(
+          (tag) =>
+            `<span class="tag">${tag}</span>`
+        )
         .join("");
 
       const venues = place.venues
@@ -641,9 +842,14 @@
 
       panel.innerHTML = `
         <p class="eyebrow">Tokyo scene pin ★</p>
+
         <h2 class="info-title">${place.name}</h2>
+
         <p class="area">${place.area}</p>
-        <p class="description">${place.description}</p>
+
+        <p class="description">
+          ${place.description}
+        </p>
 
         <div class="tag-row">
           ${tags}
@@ -664,6 +870,7 @@
     }
 
     renderPins();
+
     selectPlace("shimokitazawa");
   </script>
 </body>
