@@ -1,0 +1,489 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>OfficialGF Tokyo Scene Map</title>
+  <style>
+    :root {
+      --text: #111;
+      --muted: #555;
+      --line: rgba(0,0,0,.14);
+      --paper: rgba(255,255,255,.86);
+      --soft: rgba(255,255,255,.62);
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: transparent;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--text);
+    }
+
+    * { box-sizing: border-box; }
+
+    .scene-map {
+      width: 100%;
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 18px;
+      background: transparent;
+    }
+
+    .map-shell {
+      display: grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .map-panel,
+    .info-panel {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      box-shadow: 0 10px 30px rgba(0,0,0,.08);
+      overflow: hidden;
+    }
+
+    .map-header {
+      padding: 18px 18px 8px;
+    }
+
+    .eyebrow {
+      font-size: 12px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin: 0 0 6px;
+    }
+
+    h1, h2, h3, p { margin-top: 0; }
+
+    h1 {
+      font-size: clamp(26px, 4vw, 46px);
+      line-height: .95;
+      margin-bottom: 10px;
+      letter-spacing: -0.05em;
+    }
+
+    .intro {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.5;
+      max-width: 720px;
+      margin-bottom: 0;
+    }
+
+    .tokyo-map {
+      position: relative;
+      height: 520px;
+      margin: 12px 18px 18px;
+      border-radius: 16px;
+      overflow: hidden;
+      background:
+        linear-gradient(90deg, rgba(0,0,0,.06) 1px, transparent 1px),
+        linear-gradient(rgba(0,0,0,.06) 1px, transparent 1px),
+        radial-gradient(circle at 28% 42%, rgba(0,0,0,.10), transparent 16%),
+        radial-gradient(circle at 62% 55%, rgba(0,0,0,.08), transparent 20%),
+        rgba(255,255,255,.45);
+      background-size: 42px 42px, 42px 42px, auto, auto, auto;
+      border: 1px solid var(--line);
+    }
+
+    .route {
+      position: absolute;
+      height: 2px;
+      background: rgba(0,0,0,.34);
+      transform-origin: left center;
+      pointer-events: none;
+    }
+
+    .route.r1 { width: 270px; left: 22%; top: 40%; transform: rotate(14deg); }
+    .route.r2 { width: 230px; left: 38%; top: 48%; transform: rotate(-22deg); }
+    .route.r3 { width: 180px; left: 42%; top: 62%; transform: rotate(28deg); }
+    .route.r4 { width: 250px; left: 18%; top: 61%; transform: rotate(-9deg); }
+
+    .map-label {
+      position: absolute;
+      font-size: 11px;
+      letter-spacing: .08em;
+      color: rgba(0,0,0,.45);
+      text-transform: uppercase;
+      pointer-events: none;
+    }
+
+    .label-west { left: 7%; top: 12%; }
+    .label-central { left: 43%; top: 18%; }
+    .label-east { right: 8%; top: 31%; }
+    .label-south { left: 53%; bottom: 9%; }
+
+    .pin {
+      position: absolute;
+      transform: translate(-50%, -50%);
+      border: 0;
+      background: transparent;
+      cursor: pointer;
+      padding: 0;
+      text-align: center;
+      color: var(--text);
+    }
+
+    .pin-dot {
+      width: 22px;
+      height: 22px;
+      display: block;
+      margin: 0 auto 7px;
+      border-radius: 50%;
+      background: #111;
+      border: 3px solid #fff;
+      box-shadow: 0 0 0 2px rgba(0,0,0,.35), 0 8px 14px rgba(0,0,0,.22);
+      transition: transform .18s ease, box-shadow .18s ease;
+    }
+
+    .pin-name {
+      display: inline-block;
+      padding: 5px 8px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.9);
+      border: 1px solid rgba(0,0,0,.18);
+      font-size: 12px;
+      font-weight: 700;
+      white-space: nowrap;
+      box-shadow: 0 4px 10px rgba(0,0,0,.08);
+    }
+
+    .pin:hover .pin-dot,
+    .pin.active .pin-dot {
+      transform: scale(1.25);
+      box-shadow: 0 0 0 4px rgba(0,0,0,.18), 0 10px 18px rgba(0,0,0,.28);
+    }
+
+    .pin.active .pin-name {
+      background: #111;
+      color: #fff;
+    }
+
+    .info-panel {
+      padding: 22px;
+      min-height: 520px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 12px 0 18px;
+    }
+
+    .tag {
+      font-size: 12px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 6px 9px;
+      background: var(--soft);
+    }
+
+    .info-title {
+      font-size: 32px;
+      line-height: 1;
+      letter-spacing: -0.04em;
+      margin-bottom: 8px;
+    }
+
+    .area {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 18px;
+    }
+
+    .description {
+      line-height: 1.55;
+      font-size: 15px;
+      color: #222;
+      margin-bottom: 20px;
+    }
+
+    .section-title {
+      font-size: 12px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin: 18px 0 8px;
+    }
+
+    ul {
+      margin: 0;
+      padding-left: 18px;
+      line-height: 1.55;
+      font-size: 14px;
+    }
+
+    .button-row {
+      margin-top: auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding-top: 22px;
+    }
+
+    .map-button {
+      display: inline-block;
+      padding: 11px 14px;
+      border-radius: 999px;
+      border: 1px solid #111;
+      color: #111;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 700;
+      background: transparent;
+    }
+
+    .map-button.primary {
+      background: #111;
+      color: #fff;
+    }
+
+    .venue-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .venue-card {
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.72);
+      border-radius: 14px;
+      padding: 12px;
+      cursor: pointer;
+    }
+
+    .venue-card strong { display: block; margin-bottom: 4px; }
+    .venue-card span { color: var(--muted); font-size: 12px; line-height: 1.35; display: block; }
+
+    @media (max-width: 850px) {
+      .map-shell { grid-template-columns: 1fr; }
+      .tokyo-map { height: 430px; }
+      .info-panel { min-height: auto; }
+      .venue-list { grid-template-columns: 1fr; }
+      .pin-name { font-size: 11px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="scene-map" aria-label="Interactive Tokyo music scene map">
+    <div class="map-shell">
+      <section class="map-panel">
+        <div class="map-header">
+          <p class="eyebrow">OfficialGF field notes</p>
+          <h1>Tokyo Scene Map</h1>
+          <p class="intro">Click a neighborhood to explore beginner-friendly live houses, DIY spaces, and international indie music pockets around Tokyo.</p>
+        </div>
+
+        <div class="tokyo-map" id="tokyoMap">
+          <span class="map-label label-west">west side / diy routes</span>
+          <span class="map-label label-central">central tokyo</span>
+          <span class="map-label label-east">east tokyo</span>
+          <span class="map-label label-south">late night trains</span>
+
+          <span class="route r1"></span>
+          <span class="route r2"></span>
+          <span class="route r3"></span>
+          <span class="route r4"></span>
+        </div>
+      </section>
+
+      <aside class="info-panel" id="infoPanel">
+        <p class="eyebrow">select a pin</p>
+        <h2 class="info-title">Start with Shimokitazawa</h2>
+        <p class="area">Tokyo indie music gateway</p>
+        <p class="description">This map is designed as a visual portal for your Japanese music guide. Each pin can link to your articles, venue guides, interviews, or live reports.</p>
+        <div class="tag-row">
+          <span class="tag">live houses</span>
+          <span class="tag">indie bands</span>
+          <span class="tag">scene guide</span>
+        </div>
+        <p class="section-title">How to use this</p>
+        <ul>
+          <li>Replace the article URLs with your own blog links.</li>
+          <li>Add or remove venues inside the JavaScript data.</li>
+          <li>Host this as <strong>index.html</strong> on GitHub Pages, then iframe it into WordPress.</li>
+        </ul>
+      </aside>
+    </div>
+  </main>
+
+  <script>
+    const places = [
+      {
+        id: "shimokitazawa",
+        name: "Shimokitazawa",
+        area: "Indie bands, small venues, record shops, night wandering",
+        x: 30,
+        y: 55,
+        tags: ["indie", "live houses", "record stores"],
+        description: "Shimokitazawa is the obvious starting point for Tokyo indie discovery: walkable, venue-dense, and easy to turn into a night of small-stage hopping.",
+        venues: [
+          ["BASEMENTBAR", "Strong sound, established live-house feel, good for band discovery."],
+          ["RETRONYM", "Newer-feeling space with a bigger stage, couches, and a central Shimokita location."],
+          ["SHELTER", "Classic Shimokitazawa live-house name for guitar music history."],
+          ["THREE", "Underground-leaning indie and alternative shows."]
+        ],
+        links: [
+          ["Read the Shimokitazawa guide", "#"],
+          ["Browse live reports", "#"]
+        ]
+      },
+      {
+        id: "shibuya",
+        name: "Shibuya",
+        area: "International-friendly jams, open mics, bigger city energy",
+        x: 47,
+        y: 49,
+        tags: ["open mic", "international", "central"],
+        description: "Shibuya works well as an entry point for visitors because it has internationally friendly spaces, late-night energy, and easy transit connections.",
+        venues: [
+          ["RUBY ROOM", "Friendly staff, open mic Tuesdays, good for international musicians."],
+          ["WWW / WWW X", "Larger shows, indie-adjacent bookings, strong discovery potential."],
+          ["O-nest", "Long-running Shibuya live-house ecosystem."],
+          ["Club Quattro", "Bigger club shows and touring acts."]
+        ],
+        links: [
+          ["How to perform in Tokyo", "#"],
+          ["Tokyo live house basics", "#"]
+        ]
+      },
+      {
+        id: "asagaya",
+        name: "Asagaya",
+        area: "DIY pockets, community bars, intimate shows",
+        x: 22,
+        y: 39,
+        tags: ["DIY", "community", "small rooms"],
+        description: "Asagaya is a good pin for the scrappier, community-run side of Tokyo music: less polished, more personal, and often easier to talk to people.",
+        venues: [
+          ["GAMUSO", "DIY feel, community-run energy, food/drinks, mixed events."],
+          ["Loft A", "Talk events, music-adjacent culture, subculture programming."],
+          ["Yellow Vision", "Small-room experimental and jazz-adjacent events."],
+          ["MANHOLE Next", "Local underground event feel."]
+        ],
+        links: [
+          ["DIY Tokyo music notes", "#"],
+          ["International indie scene", "#"]
+        ]
+      },
+      {
+        id: "koenji",
+        name: "Koenji",
+        area: "Punk, used clothes, underground culture",
+        x: 26,
+        y: 31,
+        tags: ["punk", "subculture", "underground"],
+        description: "Koenji is useful for punk, noise, thrift culture, and less glossy Tokyo music routes. It feels more like a neighborhood than a tourist image.",
+        venues: [
+          ["U.F.O. CLUB", "Garage, psych, punk, and underground bookings."],
+          ["HIGH", "Broad indie and alternative live-house programming."],
+          ["JIROKICHI", "Historic room with rootsy and jazz-adjacent shows."],
+          ["ShowBoat", "Long-running rock venue energy."]
+        ],
+        links: [
+          ["Koenji scene guide", "#"],
+          ["Underground Japan posts", "#"]
+        ]
+      },
+      {
+        id: "shinjuku",
+        name: "Shinjuku",
+        area: "Dense nightlife, legacy venues, loud city shows",
+        x: 41,
+        y: 36,
+        tags: ["nightlife", "rock", "legacy"],
+        description: "Shinjuku is chaotic in a good way: legacy live houses, dense nightlife, and venues that can bridge rock, idol, experimental, and subculture scenes.",
+        venues: [
+          ["LOFT", "Major live-house history and subculture gravity."],
+          ["MARZ", "Alternative bookings and smaller discovery shows."],
+          ["WildSide Tokyo", "Rock, metal, punk, and loud-band events."],
+          ["Antiknock", "Harder underground and punk/metal lineage."]
+        ],
+        links: [
+          ["Shinjuku live house notes", "#"],
+          ["Where to see bands in Tokyo", "#"]
+        ]
+      },
+      {
+        id: "kanda-akihabara",
+        name: "Akihabara / Kanda",
+        area: "Internet music, idol-adjacent culture, niche scenes",
+        x: 68,
+        y: 42,
+        tags: ["internet music", "idol", "subculture"],
+        description: "This pin can connect Vocaloid, doujin, idol-adjacent, and internet music posts to a physical Tokyo geography without reducing it to tourist clichés.",
+        venues: [
+          ["MOGRA", "Anisong, club, internet music, and subculture DJ events."],
+          ["Club Goodman", "Long-running Akihabara live venue history."],
+          ["Kanda Square Hall", "Larger event programming nearby."],
+          ["DearStage area", "Idol/subculture-adjacent reference point."]
+        ],
+        links: [
+          ["Vocaloid history posts", "#"],
+          ["Internet music archive", "#"]
+        ]
+      }
+    ];
+
+    const map = document.getElementById("tokyoMap");
+    const panel = document.getElementById("infoPanel");
+
+    function renderPins() {
+      places.forEach((place) => {
+        const button = document.createElement("button");
+        button.className = "pin";
+        button.style.left = place.x + "%";
+        button.style.top = place.y + "%";
+        button.setAttribute("aria-label", "Open " + place.name);
+        button.innerHTML = `<span class="pin-dot"></span><span class="pin-name">${place.name}</span>`;
+        button.addEventListener("click", () => selectPlace(place.id));
+        map.appendChild(button);
+      });
+    }
+
+    function selectPlace(id) {
+      const place = places.find((item) => item.id === id);
+      if (!place) return;
+
+      document.querySelectorAll(".pin").forEach((pin) => {
+        pin.classList.toggle("active", pin.getAttribute("aria-label") === "Open " + place.name);
+      });
+
+      const tags = place.tags.map((tag) => `<span class="tag">${tag}</span>`).join("");
+      const venues = place.venues.map(([name, note]) => `
+        <div class="venue-card">
+          <strong>${name}</strong>
+          <span>${note}</span>
+        </div>
+      `).join("");
+      const links = place.links.map(([label, href], index) => `
+        <a class="map-button ${index === 0 ? "primary" : ""}" href="${href}" target="_top">${label}</a>
+      `).join("");
+
+      panel.innerHTML = `
+        <p class="eyebrow">Tokyo scene pin</p>
+        <h2 class="info-title">${place.name}</h2>
+        <p class="area">${place.area}</p>
+        <p class="description">${place.description}</p>
+        <div class="tag-row">${tags}</div>
+        <p class="section-title">Venues / reference points</p>
+        <div class="venue-list">${venues}</div>
+        <div class="button-row">${links}</div>
+      `;
+    }
+
+    renderPins();
+    selectPlace("shimokitazawa");
+  </script>
+</body>
+</html>
