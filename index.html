@@ -178,7 +178,6 @@
       left: 71%;
       top: 44%;
     }
-    
 
     .label-central {
       left: 13%;
@@ -188,6 +187,11 @@
     .label-south {
       left: 41%;
       top: 74%;
+    }
+
+    .label-east {
+      left: 74%;
+      top: 58%;
     }
 
     .pin {
@@ -234,10 +238,6 @@
     .pin:hover .pin-dot,
     .pin.active .pin-dot {
       transform: scale(1.32) rotate(14deg);
-      text-shadow:
-        0 0 10px rgba(255,224,102,1),
-        0 0 24px rgba(255,77,90,.7),
-        0 0 34px rgba(107,188,255,.65);
     }
 
     .pin.active .pin-name {
@@ -264,9 +264,6 @@
       border-radius: 999px;
       padding: 6px 10px;
       background: linear-gradient(180deg, rgba(255,255,255,.9), rgba(215,215,215,.78));
-      box-shadow:
-        inset 0 1px 0 rgba(255,255,255,.9),
-        0 3px 10px rgba(0,0,0,.08);
       font-weight: 700;
     }
 
@@ -274,12 +271,8 @@
       font-family: 'Audiowide', sans-serif;
       font-size: 34px;
       line-height: .95;
-      letter-spacing: .02em;
       margin-bottom: 8px;
       color: #1b1028;
-      text-shadow:
-        2px 2px 0 rgba(107,188,255,.55),
-        4px 4px 0 rgba(255,224,102,.35);
     }
 
     .area {
@@ -305,33 +298,6 @@
       font-weight: 800;
     }
 
-    .button-row {
-      margin-top: auto;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      padding-top: 22px;
-    }
-
-    .map-button {
-      display: inline-block;
-      padding: 11px 14px;
-      border-radius: 999px;
-      border: 1px solid rgba(0,0,0,.12);
-      color: #111;
-      text-decoration: none;
-      font-size: 13px;
-      font-weight: 800;
-      background: linear-gradient(180deg, rgba(255,255,255,.92), rgba(215,215,215,.72));
-      box-shadow:
-        inset 0 1px 0 rgba(255,255,255,.9),
-        0 4px 12px rgba(0,0,0,.08);
-    }
-
-    .map-button.primary {
-      background: linear-gradient(90deg, var(--yellow), var(--red), var(--blue));
-    }
-
     .venue-list {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -343,9 +309,6 @@
       border-radius: 16px;
       padding: 12px;
       background: linear-gradient(180deg, rgba(255,255,255,.88), rgba(215,215,215,.72));
-      box-shadow:
-        0 5px 14px rgba(0,0,0,.08),
-        inset 0 1px 0 rgba(255,255,255,.85);
     }
 
     .venue-card strong {
@@ -369,43 +332,17 @@
         height: 430px;
       }
 
-      .info-panel {
-        min-height: auto;
-      }
-
       .venue-list {
         grid-template-columns: 1fr;
-      }
-
-      .pin-name {
-        font-size: 11px;
-      }
-
-      .pin-dot {
-        font-size: 28px;
-      }
-
-      .label-west {
-        left: 63%;
-        top: 44%;
-      }
-
-      .label-central {
-        left: 10%;
-        top: 18%;
-      }
-
-      .label-south {
-        left: 36%;
-        top: 75%;
       }
     }
   </style>
 </head>
 
 <body>
-  <main class="scene-map" aria-label="Interactive Tokyo music scene map">
+  <main class="scene-map">
     <div class="map-shell">
+
       <section class="map-panel">
         <div class="map-header">
           <p class="eyebrow">OfficialGF field notes</p>
@@ -419,13 +356,10 @@
         </div>
 
         <div class="tokyo-map" id="tokyoMap">
+
           <span class="map-label label-west">
             clubs and parties
           </span>
-
-          <span class="map-label label-east">
-  late night clubs
-</span>
 
           <span class="map-label label-central">
             DIY/punk scene
@@ -435,145 +369,104 @@
             heart of the live scene
           </span>
 
+          <span class="map-label label-east">
+            late night clubs
+          </span>
+
           <span class="star s1">✦</span>
           <span class="star s2">✧</span>
           <span class="star s3">✦</span>
           <span class="star s4">✧</span>
           <span class="star s6">✧</span>
+
         </div>
       </section>
 
       <aside class="info-panel" id="infoPanel"></aside>
+
     </div>
   </main>
 
   <script>
     const places = [
+
       {
         id: "shimokitazawa",
         name: "Shimokitazawa",
-        area: "Indie bands, small venues, record shops, night wandering",
+        area: "Indie bands, small venues, record shops",
         x: 30,
         y: 64,
-        tags: ["indie", "live houses", "record stores"],
+        tags: ["indie", "live houses", "records"],
         description:
-          "Shimokitazawa is the obvious starting point for Tokyo indie discovery: walkable, venue-dense, and easy to turn into a night of small-stage hopping.",
+          "Tokyo’s most iconic indie neighborhood.",
         venues: [
-          ["BASEMENTBAR", "Strong sound, established live-house feel, good for band discovery."],
-          ["RETRONYM", "Newer-feeling space with a bigger stage, couches, and a central Shimokita location."],
-          ["SHELTER", "Classic Shimokitazawa live-house name for guitar music history."],
-          ["THREE", "Underground-leaning indie and alternative shows."]
-        ],
-        links: [
-          ["Live House Survival guide", "https://officialgf.com/2025/06/20/how-to-local/"],
-          ["Browse live reports", "https://officialgf.com/category/concert-recap/"]
+          ["BASEMENTBAR", "Established indie venue."],
+          ["RETRONYM", "Modern venue with larger stage."]
         ]
       },
 
       {
         id: "shibuya",
         name: "Shibuya",
-        area: "International-friendly jams, party vibes, bigger city energy",
+        area: "International-friendly music spaces",
         x: 56,
         y: 60,
-        tags: ["open mic", "international", "central"],
+        tags: ["international", "open mic", "central"],
         description:
-          "Shibuya works well as an entry point for visitors because it has internationally friendly spaces, late-night energy, and easy transit connections.",
+          "Late-night energy and easy venue access.",
         venues: [
-          ["RUBY ROOM", "Friendly staff, open mic Tuesdays, good for international musicians."],
-          ["WWW / WWW X", "Larger shows, indie-adjacent bookings, strong discovery potential."],
-          ["O-nest", "Long-running Shibuya live-house ecosystem."],
-          ["Club Quattro", "Bigger club shows and touring acts."]
-        ],
-        links: [
-          ["How to perform in Tokyo", "https://officialgf.com/2026/04/24/best-live-venues/"],
-          ["Artists recs", "https://officialgf.com/category/recommendations/"]
+          ["RUBY ROOM", "Open mic and community feel."],
+          ["WWW", "Larger indie bookings."]
         ]
       },
 
       {
-  id: "roppongi",
-  name: "Roppongi",
-  area: "Clubs, DJs, nightlife, international crowds",
-  x: 67,
-  y: 57,
-  tags: ["clubs", "late night", "international"],
-  description:
-    "Roppongi leans more nightlife-heavy than Tokyo’s indie band neighborhoods, but it is important for DJs, club culture, international crowds, and late-night events that blur music, fashion, and party scenes together.",
-  venues: [
-    ["CUBE", "Underground club nights, electronic events, and creative parties."],
-    ["SuperDeluxe", "Former experimental arts and music hub with strong legacy influence."],
-    ["V2 TOKYO", "Large-scale nightlife energy and mainstream club atmosphere."],
-    ["Abbey Road", "Live band venue centered around classic rock and Beatles culture."]
-  ],
-  links: [
-    ["Tokyo nightlife guide", "https://officialgf.com/"],
-    ["Late night scene notes", "https://officialgf.com/category/concert-recap/"]
-  ]
-},
+        id: "roppongi",
+        name: "Roppongi",
+        area: "Clubs, DJs, nightlife, international crowds",
+        x: 67,
+        y: 57,
+        tags: ["clubs", "late night", "international"],
+        description:
+          "Roppongi is centered around nightlife, DJs, and international club culture.",
+        venues: [
+          ["CUBE", "Electronic nights and creative parties."],
+          ["V2 TOKYO", "Large-scale nightlife energy."],
+          ["Abbey Road", "Classic rock live music venue."],
+          ["SuperDeluxe", "Experimental music legacy."]
+        ]
+      },
 
       {
         id: "asagaya",
         name: "Asagaya",
-        area: "DIY pockets, community bars, intimate shows",
+        area: "DIY pockets and community bars",
         x: 37,
         y: 34,
-        tags: ["DIY", "community", "small rooms"],
+        tags: ["DIY", "community"],
         description:
-          "Asagaya is a good pin for the scrappier, community-run side of Tokyo music: less polished, more personal, and often easier to talk to people.",
+          "Personal, community-driven music spaces.",
         venues: [
-          ["GAMUSO", "DIY feel, community-run energy, food/drinks, mixed events."],
-          ["Loft A", "Talk events, music-adjacent culture, subculture programming."],
-          ["Yellow Vision", "Small-room experimental and jazz-adjacent events."],
-          ["MANHOLE Next", "Local underground event feel."]
-        ],
-        links: [
-          ["How to find small shows", "https://officialgf.com/2025/07/23/concert-search/"],
-          ["Music Bridge", "https://officialgf.com/2026/04/02/music-bridge/]
+          ["GAMUSO", "DIY and mixed events."],
+          ["Yellow Vision", "Experimental and jazz."]
         ]
       },
 
       {
         id: "koenji",
         name: "Koenji",
-        area: "Punk, used clothes, underground culture",
+        area: "Punk and underground culture",
         x: 27,
         y: 37,
-        tags: ["punk", "subculture", "underground"],
+        tags: ["punk", "underground"],
         description:
-          "Koenji is useful for punk, noise, thrift culture, and less glossy Tokyo music routes. It feels more like a neighborhood than a tourist image.",
+          "Punk, thrift culture, and underground music.",
         venues: [
-          ["U.F.O. CLUB", "Garage, psych, punk, and underground bookings."],
-          ["HIGH", "Broad indie and alternative live-house programming."],
-          ["JIROKICHI", "Historic room with rootsy and jazz-adjacent shows."],
-          ["ShowBoat", "Long-running rock venue energy."]
-        ],
-        links: [
-          ["Music festival guide", "https://officialgf.com/2025/07/22/what-to-bring/"],
-          ["Punk posts", "https://officialgf.com/?s=punk"]
-        ]
-      },
-
-      {
-        id: "shinjuku",
-        name: "Shinjuku",
-        area: "Dense nightlife, legacy venues, chaotic Tokyo energy",
-        x: 48,
-        y: 39,
-        tags: ["nightlife", "rock", "live houses"],
-        description:
-          "Shinjuku is loud, dense, chaotic, and full of long-running live houses. Good for heavier nightlife energy and discovering multiple scenes in one night.",
-        venues: [
-          ["LOFT", "Historic live house with deep Tokyo music history."],
-          ["MARZ", "Alternative and indie-focused bookings."],
-          ["WildSide Tokyo", "Rock, punk, metal, and loud bands."],
-          ["Antiknock", "Underground punk and heavier music lineage."]
-        ],
-        links: [
-          ["Where to find merch", "https://officialgf.com/2025/05/08/where-merch-in-japan/"],
-          ["Gig photography interview", "https://officialgf.com/2026/05/14/photo-interview/"]
+          ["U.F.O CLUB", "Garage and punk."],
+          ["HIGH", "Alternative programming."]
         ]
       }
+
     ];
 
     const map = document.getElementById("tokyoMap");
@@ -581,70 +474,62 @@
 
     function renderPins() {
       places.forEach((place) => {
+
         const button = document.createElement("button");
 
         button.className = "pin";
         button.style.left = place.x + "%";
         button.style.top = place.y + "%";
 
-        button.setAttribute("aria-label", "Open " + place.name);
+        button.innerHTML = `
+          <span class="pin-dot">★</span>
+          <span class="pin-name">${place.name}</span>
+        `;
 
-        button.innerHTML =
-          `<span class="pin-dot">★</span>
-           <span class="pin-name">${place.name}</span>`;
-
-        button.addEventListener("click", () => selectPlace(place.id));
+        button.addEventListener("click", () => {
+          selectPlace(place.id);
+        });
 
         map.appendChild(button);
       });
     }
 
     function selectPlace(id) {
+
       const place = places.find((item) => item.id === id);
 
-      if (!place) return;
-
       document.querySelectorAll(".pin").forEach((pin) => {
-        pin.classList.toggle(
-          "active",
-          pin.getAttribute("aria-label") === "Open " + place.name
-        );
+        pin.classList.remove("active");
       });
 
-      const tags = place.tags
-        .map((tag) => `<span class="tag">${tag}</span>`)
-        .join("");
+      const activePin = [...document.querySelectorAll(".pin")]
+        .find(pin => pin.innerText.includes(place.name));
 
-      const venues = place.venues
-        .map(
-          ([name, note]) => `
-            <div class="venue-card">
-              <strong>${name}</strong>
-              <span>${note}</span>
-            </div>
-          `
-        )
-        .join("");
+      if (activePin) {
+        activePin.classList.add("active");
+      }
 
-      const links = place.links
-        .map(
-          ([label, href], index) => `
-            <a
-              class="map-button ${index === 0 ? "primary" : ""}"
-              href="${href}"
-              target="_top"
-            >
-              ${label}
-            </a>
-          `
-        )
-        .join("");
+      const tags = place.tags.map(tag =>
+        `<span class="tag">${tag}</span>`
+      ).join("");
+
+      const venues = place.venues.map(([name, note]) => `
+        <div class="venue-card">
+          <strong>${name}</strong>
+          <span>${note}</span>
+        </div>
+      `).join("");
 
       panel.innerHTML = `
         <p class="eyebrow">Tokyo scene pin ★</p>
+
         <h2 class="info-title">${place.name}</h2>
+
         <p class="area">${place.area}</p>
-        <p class="description">${place.description}</p>
+
+        <p class="description">
+          ${place.description}
+        </p>
 
         <div class="tag-row">
           ${tags}
@@ -657,15 +542,11 @@
         <div class="venue-list">
           ${venues}
         </div>
-
-        <div class="button-row">
-          ${links}
-        </div>
       `;
     }
 
     renderPins();
-    selectPlace("shimokitazawa");
+    selectPlace("roppongi");
   </script>
 </body>
 </html>
